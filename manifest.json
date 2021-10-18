@@ -13,10 +13,10 @@
 		}
 	],
 	"icons": {
-		"16": "/logos/16-White-logo.png",
-		"32": "/logos/32-White-logo.png",
-		"48": "/logos/48-White-logo.png",
-		"128": "/logos/128-White-logo.png"
+		"16": "/icon/16-srplus-icon.png",
+		"32": "/icon/32-srplus-icon.png",
+		"48": "/icon/48-srplus-icon.png",
+		"128": "/icon/128-srplus-icon.png"
 	},
 	"options_page": "options.html"
 }
