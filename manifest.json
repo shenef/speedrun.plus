@@ -3,11 +3,11 @@
 	"description": "Custom CSS and JS scripts to improve the sr.c experience",
 	"version": "0.0.1",
 	"manifest_version": 2,
-	"permissions": [ "*://www.speedrun.com/*", "storage" ],
+	"permissions": [ "*://*.speedrun.com/*", "storage" ],
 	"content_scripts": [
 		{
 			"run_at": "document_idle",
-			"matches": [ "*://www.speedrun.com/*" ],
+			"matches": [ "*://*.speedrun.com/*" ],
 			"js": [ "scripts/all-pages.js" ],
 			"css": [ "css/all-pages.css" ]
 		}
@@ -18,5 +18,17 @@
 		"48": "/icon/48-srplus-icon.png",
 		"128": "/icon/128-srplus-icon.png"
 	},
-	"options_page": "options.html"
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true
+	},
+	"page_action": {
+		"show_matches": ["*://*.speedrun.com/*"],
+		"default_popup": "popup.html",
+		"default_icon": {
+			"16": "/icon/16-srplus-icon.png",
+			"32": "/icon/32-srplus-icon.png",
+			"48": "/icon/48-srplus-icon.png"
+		}
+	}
 }
