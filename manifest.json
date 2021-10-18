@@ -1,23 +1,22 @@
 {
-  "name": "Speedrun.Plus",
-  "description": "This extention aims to improve speedrun.com",
-  "version": "0.0.1",
-  "manifest_version": 2,
-  "permissions": [ "*://www.speedrun.com/*", "storage" ],
-  "content_scripts": [
-    {
-      //All pages
-      "run_at": "document_idle",
-      "matches": [ "*://www.speedrun.com/*" ],
-      "js": [ "Scripts/AllPages.js" ],
-      "css": [ "css/AllPages.css" ]
-    }
-  ],
-  /*"icons": {
-    "16": "/logos/16-White-logo.png",
-    "32": "/logos/32-White-logo.png",
-    "48": "/logos/48-White-logo.png",
-    "128": "/logos/128-White-logo.png"
-  },*/
-  "options_page": "options.html"
+	"name": "speedrun.plus",
+	"description": "Custom CSS and JS scripts to improve the sr.c experience",
+	"version": "0.0.1",
+	"manifest_version": 2,
+	"permissions": [ "*://www.speedrun.com/*", "storage" ],
+	"content_scripts": [
+		{
+			"run_at": "document_idle",
+			"matches": [ "*://www.speedrun.com/*" ],
+			"js": [ "scripts/all-pages.js" ],
+			"css": [ "css/all-pages.css" ]
+		}
+	],
+	"icons": {
+		"16": "/logos/16-White-logo.png",
+		"32": "/logos/32-White-logo.png",
+		"48": "/logos/48-White-logo.png",
+		"128": "/logos/128-White-logo.png"
+	},
+	"options_page": "options.html"
 }
