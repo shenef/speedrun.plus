@@ -1,0 +1,12 @@
+/*Remove the side bar*/
+#leaderboarddiv {
+	max-width: 100% !important;
+}
+#centerwidget {
+	width: 100% !important;
+}
+
+/*Remove the widget*/
+#widget {
+	display: none !important;
+}
