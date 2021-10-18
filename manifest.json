@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       //All pages
-      "run_at": "document_start",
+      "run_at": "document_idle",
       "matches": [ "*://www.speedrun.com/*" ],
       "js": [ "Scripts/AllPages.js" ],
       "css": [ "css/AllPages.css" ]
