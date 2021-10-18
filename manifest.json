@@ -13,11 +13,11 @@
       "css": [ "css/AllPages.css" ]
     }
   ],
-  "icons": {
+  /*"icons": {
     "16": "/logos/16-White-logo.png",
     "32": "/logos/32-White-logo.png",
     "48": "/logos/48-White-logo.png",
     "128": "/logos/128-White-logo.png"
-  },
+  },*/
   "options_page": "options.html"
 }
