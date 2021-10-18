@@ -1,3 +1,4 @@
+//This will add a icon next to all of our names
 const devList = ["Yummy_Bacon5"] //Enter your SR.C name here
 const userNames = document.getElementsByClassName("link-username nobr nounderline")
 for (var i = 0; i < userNames.length; i++) {
