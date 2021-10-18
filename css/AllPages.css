@@ -1,16 +1,12 @@
 /* hide ads */
-div.malediction.hero.heroic-placement {
+div.malediction.desktop_hero {
 	display: none !important;
 }
 
-div.malediction.hero {
+div.malediction.desktop_footer {
 	display: none !important;
 }
 
-div.malediction.sidebar_a {
-	display: none !important;
-}
-
-div.malediction.rail {
+div.malediction.desktop_sidebar_a {
 	display: none !important;
 }
