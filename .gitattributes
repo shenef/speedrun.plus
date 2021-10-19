@@ -1,2 +1,5 @@
 # Use LF line endings like a normal person
 * text=auto eof=lf
+
+# Don't alter included PNG images
+*.png binary
