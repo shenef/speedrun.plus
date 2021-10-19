@@ -22,9 +22,8 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 					<div role="tabpanel" class="tab-pane" id="gameRules">inner text</div>
 					<div role="tabpanel" class="tab-pane active show" id="categoryRules">
 						<label class="switch"><input id="turnOffAds" type="checkbox" class="SRP checkbox"><span class="slider"></span></label><label for="turnOffAds">Turn off ads</label><br>
-						<label class="switch"><input id="test" type="checkbox" class="SRP checkbox"><span class="slider"></span></label><label for="test">Test</label>`
-						/* Add more checkboxes here using the switch above, this is for "Test 1" */ +
-  					`</div>
+						<label class="switch"><input id="test" type="checkbox" class="SRP checkbox"><span class="slider"></span></label><label for="test">Test</label>
+						</div>
 				</div>
 			</div>
 			<div class="modal-footer">
