@@ -11,7 +11,7 @@
       "js": [ "scripts/allpages.js" ]
     }
   ],
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html"
   },
   "icons": {
