@@ -1,45 +1,29 @@
 {
-  "name": "speedrun.plus",
-  "description": "Custom CSS and JS scripts to improve the sr.c experience",
+  "name": "Speedrun.Plus",
+  "description": "This extention aims to improve speedrun.com",
   "version": "0.0.1",
   "manifest_version": 2,
-  "permissions": [
-    "*://*.speedrun.com/*",
-    "storage"
-  ],
+  "permissions": [ "*://www.speedrun.com/*", "storage", "activeTab" ],
   "content_scripts": [
     {
       "run_at": "document_idle",
-      "matches": [
-        "*://*.speedrun.com/*"
-      ],
-      "js": [
-        "scripts/all-pages.js"
-      ],
-      "css": [
-        "css/all-pages.css"
-      ]
+      "matches": [ "*://www.speedrun.com/*" ],
+      "js": [ "scripts/allpages.js" ]
     }
   ],
+  "page_action": {
+    "default_title": "Open Speedrun.Plus Settings",
+    "default_popup": "popup.html"
+  },
   "icons": {
     "16": "/icon/16-srplus-icon.png",
     "32": "/icon/32-srplus-icon.png",
     "48": "/icon/48-srplus-icon.png",
     "128": "/icon/128-srplus-icon.png"
   },
-  "options_ui": {
-    "page": "options.html",
-    "browser_style": true
+  "background": {
+    "scripts": [ "scripts/background.js" ]
   },
-  "page_action": {
-    "show_matches": [
-      "*://*.speedrun.com/*"
-    ],
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "/icon/16-srplus-icon.png",
-      "32": "/icon/32-srplus-icon.png",
-      "48": "/icon/48-srplus-icon.png"
-    }
-  }
+  "options_page": "options.html"
 }
+
