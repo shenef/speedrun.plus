@@ -12,7 +12,6 @@
     }
   ],
   "page_action": {
-    "default_title": "Open Speedrun.Plus Settings",
     "default_popup": "popup.html"
   },
   "icons": {
@@ -20,9 +19,6 @@
     "32": "/icon/32-srplus-icon.png",
     "48": "/icon/48-srplus-icon.png",
     "128": "/icon/128-srplus-icon.png"
-  },
-  "background": {
-    "scripts": [ "scripts/background.js" ]
   },
   "options_page": "options.html"
 }
