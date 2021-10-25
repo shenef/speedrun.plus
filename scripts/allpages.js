@@ -1,16 +1,15 @@
 //This adds the Extension Settings button
 //This adds it in the username
 const settingsIcon = document.getElementsByClassName("fal fa-cog fa-margin")[0];
-const signedIn = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).signedIn
+const signedIn = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).signedIn;
 chrome.storage.sync.get(["extensionIconInNav"], function(result) {
 	if (!signedIn || result.extensionIconInNav == "1") {
-		//This adds it in the nav bar, it will show here for logged out users
+		// This adds it in the nav bar, it will show here for logged out users
 		document.getElementsByClassName("navbar-nav")[1].insertAdjacentHTML("afterbegin", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
 		return;
 	}
-	if (signedIn) {
-		settingsIcon.parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
-	}
+	if (signedIn)
+		settingsIcon.parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`;
 })
 
 //This adds the settings menu
@@ -46,39 +45,37 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 			</div>
 		</div>
 	</div>
-</div>`
+</div>`;
 
 const checkbox = document.getElementsByClassName("SRPcheckbox");
 for (i = 0; i < checkbox.length; i++) {
 	let theId = checkbox[i].id;
 
 	chrome.storage.sync.get([theId], function(result) {
-		if (result[theId] == "1") {
+		if (result[theId] == "1")
 			document.getElementById(theId).checked = true;
-		}
 	});
 
 	checkbox[i].addEventListener("change", function() {
 		chrome.storage.sync.set({
-			[theId]: this.checked ? "1" : "0"
+			[theId]: this.checked ? "1" : "0";
 		});
 	})
 }
 
 chrome.storage.sync.get(["followedIcons"], async function(result) {
 	if (signedIn && result.followedIcons == "1") {
-		//Add game covers next to the followed games in the game list
+		// Add game covers next to the followed games in the game list
 		const followedGames = document.getElementsByClassName("dropdown-menu")[0].children;
 		for (i = 3; i < followedGames.length; i++) {
 			let res = await fetch(`https://www.speedrun.com/api/v1/games/${followedGames[i].href.split("/")[3]}`).then(res => res.json());
-			followedGames[i].innerHTML = `<img class="fal fa-info-circle fa-margin" src="${res.data.assets["cover-large"].uri}"></img>` + followedGames[i].innerHTML
+			followedGames[i].innerHTML = `<img class="fal fa-info-circle fa-margin" src="${res.data.assets["cover-large"].uri}"></img>` + followedGames[i].innerHTML;
 		}
 	}
 })
 
 chrome.storage.sync.get(["turnOffAds"], function(result) {
-	if (result.turnOffAds == "1") {
-		//The code needs to be added
-		console.log("The code needs to be added")
-	}
+	/* TODO */
+	if (result.turnOffAds == "1")
+		console.log("The code needs to be added");
 })

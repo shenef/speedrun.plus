@@ -1,24 +1,21 @@
 {
-  "name": "Speedrun.Plus",
-  "description": "This extention aims to improve speedrun.com",
-  "version": "0.0.1",
-  "manifest_version": 2,
-  "permissions": [ "*://www.speedrun.com/*", "storage", "activeTab" ],
-  "content_scripts": [
-    {
-      "run_at": "document_idle",
-      "matches": [ "*://www.speedrun.com/*" ],
-      "js": [ "scripts/allpages.js" ]
-    }
-  ],
-  "browser_action": {
-    "default_popup": "popup.html"
-  },
-  "icons": {
-    "16": "/icon/16-srplus-icon.png",
-    "32": "/icon/32-srplus-icon.png",
-    "48": "/icon/48-srplus-icon.png",
-    "128": "/icon/128-srplus-icon.png"
-  }
+	"name": "Speedrun.Plus",
+	"description": "This extention aims to improve speedrun.com",
+	"version": "0.0.1",
+	"manifest_version": 2,
+	"permissions": [ "*://www.speedrun.com/*", "storage", "activeTab" ],
+	"content_scripts": [{
+		"run_at": "document_idle",
+		"matches": [ "*://www.speedrun.com/*" ],
+		"js": [ "scripts/allpages.js" ]
+	}],
+	"browser_action": {
+		"default_popup": "popup.html"
+	},
+	"icons": {
+		"16": "/icon/16-srplus-icon.png",
+		"32": "/icon/32-srplus-icon.png",
+		"48": "/icon/48-srplus-icon.png",
+		"128": "/icon/128-srplus-icon.png"
+	}
 }
-
