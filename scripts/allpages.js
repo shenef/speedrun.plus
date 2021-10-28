@@ -1,15 +1,14 @@
-//This adds the Extension Settings button
-//This adds it in the username
-const settingsIcon = document.getElementsByClassName("fal fa-cog fa-margin")[0];
-const signedIn = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).signedIn;
-chrome.storage.sync.get(["extensionIconInNav"], function(result) {
+const signedIn = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).signedIn
+const userName = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).user.name
+
+chrome.storage.sync.get(["extensionIconInNav"], (result) => {
 	if (!signedIn || result.extensionIconInNav == "1") {
-		// This adds it in the nav bar, it will show here for logged out users
-		document.getElementsByClassName("navbar-nav")[1].insertAdjacentHTML("afterbegin", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
-		return;
+		//This adds it in the nav bar, it will show here for logged out users
+		document.getElementsByClassName("nav-item")[7].insertAdjacentHTML("afterend", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
+	} else {
+		console.log("hey")
+		document.getElementsByClassName("fal fa-cog fa-margin")[0].parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
 	}
-	if (signedIn)
-		settingsIcon.parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`;
 })
 
 //This adds the settings menu
@@ -17,7 +16,7 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title"><img src="https://cdn.discordapp.com/icons/899603056235282442/343f7924b151f4975f4478f49d78dabc.webp" class="fal fa-info-circle fa-margin"></img>Extension Settings</h5>
+				<h5 class="modal-title"><img src=${chrome.extension.getURL("icon/128-srplus-icon.png")} style="width: 10%;"></img>Extension Settings</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">x</span>
 				</button>
@@ -34,48 +33,113 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 					<div role="tabpanel" class="tab-pane active show" id="categoryRules">
 						Reload the page to apply changes<br>
 						<label class="switch"><input id="turnOffAds" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="turnOffAds">Turn off ads</label><br>
-						<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">Show game's cover in Games dropdown</label><br>
+						<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">Show game's cover in Games dropdown (WIP)</label><br>
 						<label class="switch"><input id="extensionIconInNav" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInNav">Show the <i class="fal fa-cog fa-margin"></i> extension settings icon in the nav bar</label><br>
+						<label class="switch"><input id="showAllNotations" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
   					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<a class="btn btn-default" data-dismiss="modal">Close</a>
-				<a id="SRPsave" class="btn btn-primary">Save</a>
+				<a href=${window.location.href} class="btn btn-primary">Reload</a>
 			</div>
 		</div>
 	</div>
-</div>`;
+</div>`
 
+//Saves the checkboxes values in the settings menu
 const checkbox = document.getElementsByClassName("SRPcheckbox");
 for (i = 0; i < checkbox.length; i++) {
-	let theId = checkbox[i].id;
+	let theId = checkbox[i].id
 
-	chrome.storage.sync.get([theId], function(result) {
-		if (result[theId] == "1")
-			document.getElementById(theId).checked = true;
+	chrome.storage.sync.get([theId], (result) => {
+		if (result[theId] == "1") {
+			document.getElementById(theId).checked = true
+		}
 	});
 
-	checkbox[i].addEventListener("change", function() {
-		chrome.storage.sync.set({
-			[theId]: this.checked ? "1" : "0";
-		});
+	checkbox[i].addEventListener("change", function () {
+		chrome.storage.sync.set({ [theId]: this.checked ? "1" : "0" })
 	})
 }
 
-chrome.storage.sync.get(["followedIcons"], async function(result) {
+//Adds a annoucement and asks about the api key
+chrome.storage.sync.get(["apiAllowed"], (result) => {
+
+	/*apiAllowed: 0 = They haven't allowed or disallowed use of their api key
+	apiAllowed: 1 = They have allowed use of their API key
+	apiAllowed: 2 = The have dismissed it*/
+
+	if (result.apiAllowed == "0" && signedIn) {
+		document.getElementsByClassName("fullscreen-menu-background")[0].innerHTML += `<div class="global-announcement normal" style="margin-bottom: 16px">
+		<div class="content">
+			<img src="/images/1st.png" class="favicon-16"></img>
+			<span>Allow us to use your API key to unlock more features</span>
+			<a class="red" id="SRPapi">Sure</a>
+			<a href="/modhub" class="red" id="SRPapino">Dismis</a>
+			<a href="/modhub" class="red id="SRPapimore"><small>Learn more info</small></a>
+		</div>
+	</div>` /* TODO */
+		document.getElementById("SRPapi").addEventListener("mouseup", () => {
+			chrome.storage.sync.set({ "apiAllowed": "1" });
+			var xhttp = new XMLHttpRequest();
+			xhttp.responseType = "document"
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					chrome.storage.sync.set({ "apiKey": this.response.getElementsByTagName("code")[0].innerText })
+					console.log(this.response.getElementsByTagName("code")[0].innerText)
+				}
+			};
+			xhttp.open("GET", `https://www.speedrun.com/${userName}/settings/api`, true)
+			xhttp.send()
+		})
+
+		document.getElementById("SRPapimore").addEventListener("mouseup", () => {
+
+		})
+
+		document.getElementById("SRPapino").addEventListener("mouseup", () => {
+			document.getElementsByClassName("global-announcement")[0].remove();
+			chrome.storage.sync.set({ "apiAllowed": "2" });
+		})
+
+	}
+})
+
+//Adds game covers next to the followed games in the game list
+chrome.storage.sync.get(["followedIcons"], async (result) => {
 	if (signedIn && result.followedIcons == "1") {
-		// Add game covers next to the followed games in the game list
-		const followedGames = document.getElementsByClassName("dropdown-menu")[0].children;
+		const followedGames = document.getElementsByClassName("dropdown-menu")[0].children
 		for (i = 3; i < followedGames.length; i++) {
-			let res = await fetch(`https://www.speedrun.com/api/v1/games/${followedGames[i].href.split("/")[3]}`).then(res => res.json());
-			followedGames[i].innerHTML = `<img class="fal fa-info-circle fa-margin" src="${res.data.assets["cover-large"].uri}"></img>` + followedGames[i].innerHTML;
+			/* TODO */
+			const res = await fetch(`https://www.speedrun.com/api/v1/games/${followedGames[i].href.split("/")[3]}`).then(res => res.json())
+			followedGames[i].innerHTML = `<img class="fal fa-info-circle fa-margin" src="${res.data.assets["cover-large"].uri}"></img>` + followedGames[i].innerHTML
 		}
 	}
 })
 
-chrome.storage.sync.get(["turnOffAds"], function(result) {
-	/* TODO */
-	if (result.turnOffAds == "1")
-		console.log("The code needs to be added");
+//Removes the adverts
+chrome.storage.sync.get(["turnOffAds"], (result) => {
+	if (result.turnOffAds == "1") {
+		//Add the adverts here
+		const adverts = [document.querySelector("div.malediction.desktop_hero"), document.querySelector("div.malediction.desktop_footer"), document.querySelector("div.malediction.desktop_sidebar_a")]
+		for (i = 0; i < adverts.length; i++) {
+			if (adverts[i]) { adverts[i].remove() }
+		}
+	}
 })
+
+//Shows all notations
+chrome.storage.sync.get(["showAllNotations"], (result) => {
+	if (result.showAllNotations == "1") {
+		const notationList = document.getElementById("dropdown-notifications")
+		for (i = 0; i < notationList.length; i++) {
+			/* TODO */
+		}
+	}
+})
+
+//This adds our Discord link into the nav bar
+document.querySelector(".dropdown-item[href='https://discord.gg/0h6sul1ZwHVpXJmK']").outerHTML += `<a class="dropdown-item" href="https://discord.gg/SegUjWCGqq" target="_blank"><span class="icomoon icon-discord"></span>Speedrun.Plus Discord</a>`
+//Adds the Speedrun.Plus text to the footer
+document.getElementsByTagName("footer")[0].innerHTML += `<br><a href="https://github.com/shenef/speedrun.plus">Speedrun.Plus</a>`
