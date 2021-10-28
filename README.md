@@ -15,7 +15,7 @@ steps to install speedrun.plus. Download the extension files by clicking [here][
 zip. Then proceed with the steps below.
 
 ### Chrome: 
-Open [chrome://extensions][4] (menu button > More tools > Extensions), enable the Developer mode > 
+Open [chrome://extensions](chrome://extensions) (menu button > More tools > Extensions), enable the Developer mode > 
 "Load unpacked" > open the folder that was contained in the zip you just downloaded > click 
 "Select Folder" 
 
