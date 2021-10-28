@@ -15,12 +15,12 @@ steps to install speedrun.plus. Download the extension files by clicking [here][
 zip. Then proceed with the steps below.
 
 ### Chrome: 
-Open `chrome://extensions/` (menu button > More tools > Extensions), enable the Developer mode > 
+Open `[chrome://extensions][4]` (menu button > More tools > Extensions), enable the Developer mode > 
 "Load unpacked" > open the folder that was contained in the zip you just downloaded > click 
 "Select Folder" 
 
 ### Firefox:
-Open `about:debugging#/runtime/this-firefox` (Settings > Extensions & Themes > click the cog in 
+Open `[about:debugging#/runtime/this-firefox][5]` (Settings > Extensions & Themes > click the cog in 
 the top right of the page > Debug Add-ons), click on "Load Temporary Add-on..." and open the 
 manifest.json file in the folder you just extracted the downloaded files to.  
 Unfortunately, you will have to repeat those steps every time you launch Firefox.
@@ -28,3 +28,5 @@ Unfortunately, you will have to repeat those steps every time you launch Firefox
 [1]: https://www.speedrun.com
 [2]: https://discord.gg/yu6S7xqHgM
 [3]: https://github.com/shenef/speedrun.plus/archive/refs/heads/main.zip
+[4]: chrome://extensions
+[5]: about:debugging#/runtime/this-firefox
