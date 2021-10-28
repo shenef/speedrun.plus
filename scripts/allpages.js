@@ -37,6 +37,7 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 						<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">Show game's cover in Games dropdown (WIP)</label><br>
 						<label class="switch"><input id="extensionIconInName" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInName">Show the <i class="fal fa-cog fa-margin"></i> extension settings icon under your name</label><br>
 						<label class="switch"><input id="showAllNotations" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
+						<label class="switch"><input id="allow" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
   					</div>
 				</div>
 			</div>
@@ -77,12 +78,13 @@ chrome.storage.sync.get(["apiAllowed"], (result) => {
 			<img src="/images/1st.png" class="favicon-16"></img>
 			<span>Allow us to use your API key to unlock more features</span>
 			<a class="red" id="SRPapi">Sure</a>
-			<a href="/modhub" class="red" id="SRPapino">Dismis</a>
-			<a href="/modhub" class="red id="SRPapimore"><small>Learn more info</small></a>
+			<a class="red" id="SRPapino">Dismis</a>
+			<a class="red id="SRPapimore"><small>Learn more info</small></a>
 		</div>
 	</div>` /* TODO */
 		document.getElementById("SRPapi").addEventListener("mouseup", () => {
 			chrome.storage.sync.set({ "apiAllowed": "1" });
+			document.getElementsByClassName("global-announcement")[0].remove();
 			var xhttp = new XMLHttpRequest();
 			xhttp.responseType = "document"
 			xhttp.onreadystatechange = function () {
@@ -95,16 +97,17 @@ chrome.storage.sync.get(["apiAllowed"], (result) => {
 			xhttp.send()
 		})
 
-		document.getElementById("SRPapimore").addEventListener("mouseup", () => {
-
-		})
-
 		document.getElementById("SRPapino").addEventListener("mouseup", () => {
 			document.getElementsByClassName("global-announcement")[0].remove();
 			chrome.storage.sync.set({ "apiAllowed": "2" });
 		})
 
+		document.getElementById("SRPapimore").addEventListener("mouseup", () => {
+
+		})
+		return
 	}
+	/*TODO, add a checkbox in the settings to let someone allow/deny access to their api key again*/
 })
 
 //Adds game covers next to the followed games in the game list
