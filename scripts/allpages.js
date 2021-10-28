@@ -1,13 +1,14 @@
 const signedIn = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).signedIn
 const userName = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).user.name
 
-chrome.storage.sync.get(["extensionIconInNav"], (result) => {
-	if (!signedIn || result.extensionIconInNav == "1") {
+chrome.storage.sync.get(["extensionIconInName"], (result) => {
+	if (signedIn && result.extensionIconInName == "1") {
+		
+		document.getElementsByClassName("fal fa-cog fa-margin")[0].parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
+	} else {
 		//This adds it in the nav bar, it will show here for logged out users
 		document.getElementsByClassName("nav-item")[7].insertAdjacentHTML("afterend", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
-	} else {
-		console.log("hey")
-		document.getElementsByClassName("fal fa-cog fa-margin")[0].parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
+		
 	}
 })
 
@@ -34,7 +35,7 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 						Reload the page to apply changes<br>
 						<label class="switch"><input id="turnOffAds" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="turnOffAds">Turn off ads</label><br>
 						<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">Show game's cover in Games dropdown (WIP)</label><br>
-						<label class="switch"><input id="extensionIconInNav" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInNav">Show the <i class="fal fa-cog fa-margin"></i> extension settings icon in the nav bar</label><br>
+						<label class="switch"><input id="extensionIconInName" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInName">Show the <i class="fal fa-cog fa-margin"></i> extension settings icon under your name</label><br>
 						<label class="switch"><input id="showAllNotations" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
   					</div>
 				</div>
