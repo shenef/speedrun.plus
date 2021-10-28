@@ -67,11 +67,11 @@ for (i = 0; i < checkbox.length; i++) {
 //Adds a annoucement and asks about the api key
 chrome.storage.sync.get(["apiAllowed"], (result) => {
 
-	/*apiAllowed: 0 = They haven't allowed or disallowed use of their api key
+	/*apiAllowed: null = They haven't allowed or disallowed use of their api key
 	apiAllowed: 1 = They have allowed use of their API key
 	apiAllowed: 2 = The have dismissed it*/
 
-	if (result.apiAllowed == "0" && signedIn) {
+	if (result.apiAllowed == null && signedIn) {
 		document.getElementsByClassName("fullscreen-menu-background")[0].innerHTML += `<div class="global-announcement normal" style="margin-bottom: 16px">
 		<div class="content">
 			<img src="/images/1st.png" class="favicon-16"></img>
