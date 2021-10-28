@@ -37,7 +37,6 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML += `
 						<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">Show game's cover in Games dropdown (WIP)</label><br>
 						<label class="switch"><input id="extensionIconInName" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInName">Show the <i class="fal fa-cog fa-margin"></i> extension settings icon under your name</label><br>
 						<label class="switch"><input id="showAllNotations" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
-						<label class="switch"><input id="allow" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotations">Show all Notations by default (WIP)</label><br>
   					</div>
 				</div>
 			</div>
