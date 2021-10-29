@@ -3,7 +3,7 @@ const userName = JSON.parse(document.querySelector("head [name='src:session']").
 
 chrome.storage.sync.get(["extensionIconInName"], (result) => {
 	if (signedIn && result.extensionIconInName == "1") {
-		document.getElementsByClassName("fal fa-cog fa-margin")[0].parentNode.outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
+		document.querySelector(".dropdown-item[href='/settings']").outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
 	} else {
 		//This adds the icon to the navbar, also shows for logged out users
 		document.getElementsByClassName("nav-item")[7].insertAdjacentHTML("afterend", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
@@ -24,19 +24,20 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML +=
 				<div class="modal-body">
 					<div role="tabpanel">
 						<ul class="nav nav-row" role="tablist">
-							<li role="presentation" class="nav-item nav-link category active"><a href="#general" aria-controls="general" role="tab" data-toggle="tab" class="gameRuleTab active show" aria-selected="true">General</a></li>
+							<li role="presentation" class="nav-item nav-link category active"><a href="#SRPgeneral" aria-controls="SRPgeneral" role="tab" data-toggle="tab" class="gameRuleTab active show" aria-selected="true">General</a></li>
 							<li role="presentation" class="nav-item nav-link category"><a href="#design" aria-controls="design" role="tab" data-toggle="tab"">Design</a></li>
 							<li role="presentation" class="nav-item nav-link category"><a href="#functionality" aria-controls="functionality" role="tab" data-toggle="tab">Functionality</a></li>
 						</ul>
 					</div>
 					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active show" id="general">
+						<div role="tabpanel" class="tab-pane active show" id="SRPgeneral">
 							<label class="switch"><input id="toggleAds" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="toggleAds">&nbsp;Hide ads</label><br>
 							<label class="switch"><input id="extensionIconInName" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="extensionIconInName">
 								&nbsp;Show the <i class="fal fa-cog fa-margin"></i> extension settings icon under your name</label><br>
 						</div>
 						<div role="tabpanel" class="tab-pane" id="design">
 							<label class="switch"><input id="followedIcons" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="followedIcons">&nbsp;Show game cover in Games dropdown (WIP)</label><br>
+							<label class="switch"><input id="upperCaseText" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="upperCaseText">&nbsp;Remove the uppercase text</label><br>
 	  					</div>
 						<div role="tabpanel" class="tab-pane" id="functionality">
 							<label class="switch"><input id="showAllNotifications" type="checkbox" class="SRPcheckbox"><span class="slider"></span></label><label for="showAllNotifications">&nbsp;Always show all notifications (WIP)</label><br>
@@ -45,7 +46,7 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML +=
 				</div>
 				<div class="modal-footer">
 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-					<a href=${window.location.href} class="btn btn-primary">Reload to apply</a>
+					<a href=${window.location.href.split("#")[0]} class="btn btn-primary">Reload to apply</a>
 				</div>
 			</div>
 		</div>
@@ -155,12 +156,24 @@ chrome.storage.sync.get(["showAllNotifications"], (result) => {
 	}
 })
 
-//This adds our Discord link into the navbar
+//Re
+chrome.storage.sync.get(["upperCaseText"], (result) => {
+	if (result.upperCaseText == "1") {
+		const sheet = new CSSStyleSheet()
+		sheet.replaceSync('body.dark .widget-title { text-transform: none !important; }')
+		document.adoptedStyleSheets = [sheet]
+	}
+})
+
+//This adds our Discord and GitHub into the navbar
 document.querySelector(".dropdown-item[href='https://discord.gg/0h6sul1ZwHVpXJmK']").outerHTML +=
 	`<div class="dropdown-divider"></div>
 	<div class="dropdown-header">speedrun.plus</div>
 	<a class="dropdown-item" href="https://discord.gg/SegUjWCGqq" target="_blank"><span class="fab fa-discord fa-margin"></span>Discord</a>
 	<a class="dropdown-item" href="https://github.com/shenef/speedrun.plus" target="_blank"><span class="fas fa-code fa-margin"></span>GitHub</a>`
+
 //Adds the speedrun.plus text to the footer
-document.getElementsByTagName("footer")[0].innerHTML +=
-	`<br><a href="https://github.com/shenef/speedrun.plus">speedrun.plus</a>`
+document.getElementsByTagName("footer")[0].innerHTML += `<br><a href="https://github.com/shenef/speedrun.plus">speedrun.plus</a>`
+
+//Updates the Discord logo to the new one
+document.getElementsByClassName("icon-discord")[0].className = "fab fa-discord fa-margin"
