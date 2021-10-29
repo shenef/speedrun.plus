@@ -159,7 +159,7 @@ chrome.storage.sync.get(["showAllNotifications"], (result) => {
 document.querySelector(".dropdown-item[href='https://discord.gg/0h6sul1ZwHVpXJmK']").outerHTML +=
 	`<div class="dropdown-divider"></div>
 	<div class="dropdown-header">speedrun.plus</div>
-	<a class="dropdown-item" href="https://discord.gg/SegUjWCGqq" target="_blank"><span class="icomoon icon-discord"></span>Discord</a>
+	<a class="dropdown-item" href="https://discord.gg/SegUjWCGqq" target="_blank"><span class="fab fa-discord fa-margin"></span>Discord</a>
 	<a class="dropdown-item" href="https://github.com/shenef/speedrun.plus" target="_blank"><span class="fas fa-code fa-margin"></span>GitHub</a>`
 //Adds the speedrun.plus text to the footer
 document.getElementsByTagName("footer")[0].innerHTML +=
