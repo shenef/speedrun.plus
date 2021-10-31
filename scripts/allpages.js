@@ -136,7 +136,8 @@ chrome.storage.sync.get(["toggleAds"], (result) => {
 		const adverts = [
 			document.querySelector("div.malediction.desktop_hero"),
 			document.querySelector("div.malediction.desktop_footer"),
-			document.querySelector("div.malediction.desktop_sidebar_a")
+			document.querySelector("div.malediction.desktop_sidebar_a"),
+			document.querySelector("div.malediction.desktop_sidebar_b")
 		]
 		for (i = 0; i < adverts.length; i++) {
 			if (adverts[i]) {
