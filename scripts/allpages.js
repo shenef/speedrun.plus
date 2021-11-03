@@ -2,15 +2,13 @@ const signedIn = JSON.parse(document.querySelector("head [name='src:session']").
 const userName = JSON.parse(document.querySelector("head [name='src:session']").getAttribute("content")).user.name
 
 chrome.storage.sync.get(["extensionIconInName"], (result) => {
-	if (signedIn && result.extensionIconInName == "1") {
+	if (signedIn && result.extensionIconInName == "1")
 		document.querySelector(".dropdown-item[href='/settings']").outerHTML += `<a class="dropdown-item" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i>Extension Settings</a>`
-	} else {
-		//This adds the icon to the navbar, also shows for logged out users
+	else // This adds the icon to the navbar, also shows for logged out users
 		document.getElementsByClassName("nav-item")[7].insertAdjacentHTML("afterend", `<li class="nav-item dropdown"><a class="nav-link" href="#SRPsettings" data-toggle="modal"><i class="fal fa-cog fa-margin"></i><span class="badge badge-counter"></span></a></li>`);
-	}
 })
 
-//This adds the settings menu
+// This adds the settings menu
 document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML +=
 	`<div class="modal fade formatting-help" id="SRPsettings" role="dialog" style="display: none;" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -52,28 +50,26 @@ document.getElementsByClassName("navbar-background fixed-top")[0].outerHTML +=
 		</div>
 	</div>`
 
-//Saves the checkboxes values in the settings menu
+// Saves the checkboxes values in the settings menu
 const checkbox = document.getElementsByClassName("SRPcheckbox");
 for (i = 0; i < checkbox.length; i++) {
 	let theId = checkbox[i].id
-	chrome.storage.sync.get([theId], (result) => {
-		if (result[theId] == "1") {
+	chrome.storage.sync.get([theId], result => {
+		if (result[theId] == "1")
 			document.getElementById(theId).checked = true
-		}
 	});
-	checkbox[i].addEventListener("change", function () {
-		chrome.storage.sync.set({
-			[theId]: this.checked ? "1" : "0"
-		})
+	checkbox[i].addEventListener("change", () => {
+		chrome.storage.sync.set({[theId]: this.checked ? "1" : "0"})
 	})
 }
 
-//Adds an announcement and asks about the api key
-chrome.storage.sync.get(["apiAllowed"], (result) => {
+// Adds an announcement and asks about the api key
+chrome.storage.sync.get(["apiAllowed"], result => {
 
-	/*apiAllowed: null = User hasn't allowed or disallowed use of their api key
-	apiAllowed: 1 = User has allowed use of their API key
-	apiAllowed: 2 = User has dismissed it*/
+	/* apiAllowed: null = User hasn't allowed or disallowed use of their api key
+	 * apiAllowed: 1 = User has allowed use of their API key
+	 * apiAllowed: 2 = User has dismissed it
+	 */
 
 	if (result.apiAllowed == null && signedIn) {
 		document.getElementsByClassName("fullscreen-menu-background")[0].innerHTML += `
@@ -114,10 +110,10 @@ chrome.storage.sync.get(["apiAllowed"], (result) => {
 		document.getElementById("SRPapimore").addEventListener("mouseup", () => {})
 		return
 	}
-	/*TODO, add a checkbox in the settings to let someone allow/deny access to their api key again*/
+	/* TODO, add a checkbox in the settings to let someone allow/deny access to their api key again */
 })
 
-//Adds game covers next to the followed games in the game list
+// Adds game covers next to the followed games in the game list
 chrome.storage.sync.get(["followedIcons"], async (result) => {
 	if (signedIn && result.followedIcons == "1") {
 		const followedGames = document.getElementsByClassName("dropdown-menu")[0].children
@@ -129,10 +125,10 @@ chrome.storage.sync.get(["followedIcons"], async (result) => {
 	}
 })
 
-//Removes the adverts
-chrome.storage.sync.get(["toggleAds"], (result) => {
+// Removes the adverts
+chrome.storage.sync.get(["toggleAds"], result => {
 	if (result.toggleAds == "1") {
-		//Add the adverts here
+		// Add the adverts here
 		const adverts = [
 			document.querySelector("div.malediction.desktop_hero"),
 			document.querySelector("div.malediction.desktop_footer"),
@@ -144,16 +140,12 @@ chrome.storage.sync.get(["toggleAds"], (result) => {
 			document.querySelector("div.malediction.mobile_midcontent_b"),
 			document.querySelector("div.malediction.mobile_footer")
 		]
-		for (i = 0; i < adverts.length; i++) {
-			if (adverts[i]) {
-				adverts[i].remove()
-			}
-		}
+		adverts.filter(x => x).forEach(x => x.remove());
 	}
 })
 
-//Shows all notifications
-chrome.storage.sync.get(["showAllNotifications"], (result) => {
+// Shows all notifications
+chrome.storage.sync.get(["showAllNotifications"], result => {
 	if (result.showAllNotifications == "1") {
 		const notificationList = document.getElementById("dropdown-notifications")
 		for (i = 0; i < notificationList.length; i++) {
@@ -162,8 +154,8 @@ chrome.storage.sync.get(["showAllNotifications"], (result) => {
 	}
 })
 
-//Re
-chrome.storage.sync.get(["upperCaseText"], (result) => {
+// Re
+chrome.storage.sync.get(["upperCaseText"], result => {
 	if (result.upperCaseText == "1") {
 		const sheet = new CSSStyleSheet()
 		sheet.replaceSync('body.dark .widget-title { text-transform: none !important; }')
@@ -171,15 +163,15 @@ chrome.storage.sync.get(["upperCaseText"], (result) => {
 	}
 })
 
-//This adds our Discord and GitHub into the navbar
+// This adds our Discord and GitHub into the navbar
 document.querySelector(".dropdown-item[href='https://discord.gg/0h6sul1ZwHVpXJmK']").outerHTML +=
 	`<div class="dropdown-divider"></div>
 	<div class="dropdown-header">speedrun.plus</div>
 	<a class="dropdown-item" href="https://discord.gg/SegUjWCGqq" target="_blank"><span class="fab fa-discord fa-margin"></span>Discord</a>
 	<a class="dropdown-item" href="https://github.com/shenef/speedrun.plus" target="_blank"><span class="fas fa-code fa-margin"></span>GitHub</a>`
 
-//Adds the speedrun.plus text to the footer
+// Adds the speedrun.plus text to the footer
 document.getElementsByTagName("footer")[0].innerHTML += `<br><a href="https://github.com/shenef/speedrun.plus">speedrun.plus</a>`
 
-//Updates the Discord logo to the new one
+// Updates the Discord logo to the new one
 document.getElementsByClassName("icon-discord")[0].className = "fab fa-discord fa-margin"
