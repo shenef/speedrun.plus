@@ -137,7 +137,12 @@ chrome.storage.sync.get(["toggleAds"], (result) => {
 			document.querySelector("div.malediction.desktop_hero"),
 			document.querySelector("div.malediction.desktop_footer"),
 			document.querySelector("div.malediction.desktop_sidebar_a"),
-			document.querySelector("div.malediction.desktop_sidebar_b")
+			document.querySelector("div.malediction.desktop_sidebar_b"),
+			document.querySelector("div.malediction.desktop_skin"),
+			document.querySelector("div.malediction.mobile_skin"),
+			document.querySelector("div.malediction.mobile_hero"),
+			document.querySelector("div.malediction.mobile_midcontent_b"),
+			document.querySelector("div.malediction.mobile_footer")
 		]
 		for (i = 0; i < adverts.length; i++) {
 			if (adverts[i]) {
