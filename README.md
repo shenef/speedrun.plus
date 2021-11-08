@@ -3,7 +3,7 @@
   
 # speedrun.plus
 * [About](#About)
-* [Installation](#Installation)
+* [Download](#Download)
   * [Chrome](#Chrome)
   * [Firefox](#Firefox)
 ## About 
@@ -12,7 +12,7 @@ experience, and maybe even performance of [speedrun.com][1]. The plan is to supp
 Firefox-based browsers as well as Safari. If you are interested in contributing to the project, 
 you can join our [Discord Server][2] where we discuss things.
 
-## Installation
+## Download
 Since the extension is not yet available in a browser extension store you have to do some manual 
 steps to install speedrun.plus. Download the extension files by clicking [here][3] and extract the 
 zip. Then proceed with the steps below.
