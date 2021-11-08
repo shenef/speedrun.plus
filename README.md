@@ -2,7 +2,10 @@
   -->
   
 # speedrun.plus
-
+* [About](#About)
+* [Installation](#Installation)
+  * [Chrome](#Chrome)
+  * [Firefox](#Firefox)
 ## About 
 speedrun.plus is an in-development browser extension that aims to improve the user interface, 
 experience, and maybe even performance of [speedrun.com][1]. The plan is to support Chromium and 
