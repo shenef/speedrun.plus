@@ -53,7 +53,6 @@ const checkbox = document.getElementsByClassName("SRPcheckbox");
 for (i = 0; i < checkbox.length; i++) {
 	let theId = checkbox[i].id
 	chrome.storage.sync.get([theId], (result) => {
-		console.log(theId + ": " + result[theId])
 		if (result[theId] == "1") {
 			document.getElementById(theId).checked = true
 		}
